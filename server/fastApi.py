@@ -1,9 +1,19 @@
 from . import main
 from fastapi import FastAPI
 from pydantic import BaseModel
-
+from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
+
+# core permission
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  
+    allow_credentials=True,
+    allow_methods=["*"],  
+    allow_headers=["*"],
+)
+
 
 @app.get("/transaction")
 async def get_items():
@@ -12,7 +22,7 @@ async def get_items():
 
 
 class Transaction(BaseModel):
-    amount: float
+    amount: str
     type: str
     describe: str
     
@@ -25,11 +35,14 @@ async def create_transaction(transaction: Transaction):
             "newTransaction":{'amount': transaction.amount, 'type': transaction.type, 'describe': transaction.describe},
             "status": 'Success'}
 
+
+class DeleteTransaction(BaseModel):
+    transaction_id: int
+
 @app.delete("/transaction/delete")
-async def delete_transaction(transaction_id: int):
-    main.deleteTransaction(transaction_id)
+async def delete_transaction(data: DeleteTransaction):
+    main.deleteTransaction(data.transaction_id)
     record = main.getTransaction()
-    
     return record
 
 
