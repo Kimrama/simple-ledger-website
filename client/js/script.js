@@ -48,7 +48,7 @@ function fetchAndPopulateTable() {
 }
 
 function deleteRecord(recordId, tableRow) {
-    const deleteUrl = `/transaction/delete`;
+    const deleteUrl = `http://127.0.0.1:8000/transaction/delete`;
 
     fetch(deleteUrl, {
         method: "DELETE",
@@ -121,7 +121,7 @@ document.addEventListener("DOMContentLoaded", () => {
         console.log(newRecord);
 
         // Make the POST request to add the new record to the backend
-        fetch("/transaction/add", {
+        fetch("http://127.0.0.1:8000/transaction/add", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
