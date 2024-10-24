@@ -1,5 +1,5 @@
 function fetchAndPopulateTable() {
-    fetch("https://668d30f0099db4c579f20b09.mockapi.io/record", {
+    fetch("http://127.0.0.1:8000/transaction", {
         mode: "cors",
     })
         .then((response) => {
@@ -10,7 +10,7 @@ function fetchAndPopulateTable() {
                 return text ? JSON.parse(text) : {};
             });
         })
-        .then((data) => {
+        .then(({ data }) => {
             const tableBody = document.getElementById("table-body");
 
             tableBody.innerHTML = "";
@@ -47,13 +47,15 @@ function fetchAndPopulateTable() {
         });
 }
 
-// Function to delete a record by sending a DELETE request to the backend
 function deleteRecord(recordId, tableRow) {
-    const deleteUrl = `https://668d30f0099db4c579f20b09.mockapi.io/record/${recordId}`;
+    const deleteUrl = `/transaction/delete`;
 
     fetch(deleteUrl, {
         method: "DELETE",
-        mode: "cors",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ transaction_id: recordId }), // This should match the FastAPI backend's expected data
     })
         .then((response) => {
             if (!response.ok) {
@@ -114,18 +116,17 @@ document.addEventListener("DOMContentLoaded", () => {
         const newRecord = {
             amount: amount,
             type: type,
-            description: describe,
-            date: currentDate,
-            sum: amount, // Assuming sum is the same as amount, adjust if needed
+            describe: describe,
         };
+        console.log(newRecord);
 
         // Make the POST request to add the new record to the backend
-        fetch("https://668d30f0099db4c579f20b09.mockapi.io/record", {
-            method: "POST", // Specify POST method
+        fetch("/transaction/add", {
+            method: "POST",
             headers: {
-                "Content-Type": "application/json", // Tell the server we are sending JSON
+                "Content-Type": "application/json",
             },
-            body: JSON.stringify(newRecord), // Send the new record data as JSON
+            body: JSON.stringify(newRecord),
         })
             .then((response) => {
                 if (!response.ok) {

@@ -8,9 +8,9 @@ def getTransaction():
     sum = 0
     for transaction in record:
         if transaction[2] == "income":
-            sum = sum + transaction[1]
+            sum = sum + int(transaction[1])
         elif transaction[2] == "expense":
-            sum = sum - transaction[1]
+            sum = sum - int(transaction[1])
         thisDict = {'id':transaction[0],
                     'amount':transaction[1],
                     'type':transaction[2],
