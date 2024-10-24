@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="./css/reset.css" />
+        <link rel="stylesheet" href="./css/style.css" />
+        <title>Ledger</title>
+    </head>
+    <body>
+        <header><h1 class="header-title">Ledger</h1></header>
+        <main>
+            <div class="main-container">
+                <div class="title-container">
+                    <h2 id="body-title">Record</h2>
+                    <button class="add-btn" id="addButton">ADD</button>
+                </div>
+                <table class="record-table" id="recordTable">
+                    <tr>
+                        <th>ID</th>
+                        <th>AMOUNT</th>
+                        <th>TYPE</th>
+                        <th>DESCRIBE</th>
+                        <th>DATE</th>
+                        <th>SUM</th>
+                        <th></th>
+                    </tr>
+                    <tbody id="table-body"></tbody>
+                </table>
+                <div id="addRecordForm">
+                    <form id="recordForm">
+                        <label for="amount">Amount:</label>
+                        <br /><br />
+                        <input
+                            type="number"
+                            id="amount"
+                            name="amount"
+                            required
+                        /><br /><br />
+
+                        <label>Type</label><br />
+                        <input
+                            type="radio"
+                            id="Income"
+                            name="type"
+                            value="Income"
+                        />
+                        <label>Income</label><br />
+                        <input
+                            type="radio"
+                            id="Expense"
+                            name="type"
+                            value="Expense"
+                        />
+                        <label>Expense</label><br />
+                        <br /><br />
+
+                        <label for="describe">Describe:</label>
+                        <br /><br />
+                        <input
+                            type="text"
+                            id="describe"
+                            name="describe"
+                            required
+                        /><br /><br />
+
+                        <button type="submit" class="submit">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </main>
+        <script src="./js/script.js"></script>
+    </body>
+</html>

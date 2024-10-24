@@ -1,0 +1,91 @@
+.add-btn {
+    width: 170px;
+    font-size: 25px;
+    border-radius: 5px;
+    background-color: #64a360;
+    cursor: pointer;
+}
+#addRecordForm {
+    display: none;
+    margin-top: 20px;
+}
+body {
+    font-family: sans-serif;
+    width: 100%;
+    background-color: #cce4d3;
+}
+.delete-btn {
+    border: none;
+    cursor: pointer;
+    color: white;
+    background-color: #a31609;
+}
+.main-container {
+    margin-top: 20px;
+    width: 90%;
+}
+
+header {
+    color: white;
+    background: #07120f;
+    height: 70px;
+    display: flex;
+    align-items: center;
+}
+h1 {
+    font-size: 50px;
+    margin-left: 30px;
+}
+h2 {
+    font-size: 40px;
+}
+h3 {
+    margin-top: 20px;
+}
+
+main {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+.title-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+    margin-top: 20px;
+    background-color: aliceblue;
+}
+
+td,
+th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+th {
+    font-size: larger;
+    background-color: #b6d0bc;
+}
+
+th:nth-child(1) {
+    width: 100px;
+}
+td:nth-child(7) {
+    display: flex;
+    justify-content: center;
+}
+label {
+    font-size: 30px;
+}
+input {
+    font-size: 30px;
+}
+.submit {
+    font-size: 30px;
+    background-color: #64a360;
+}
