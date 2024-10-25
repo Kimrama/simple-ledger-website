@@ -15,6 +15,7 @@ body {
     background-color: #cce4d3;
 }
 .delete-btn {
+    font-size: 20px;
     border: none;
     cursor: pointer;
     color: white;
@@ -68,12 +69,15 @@ th {
     padding: 8px;
 }
 th {
-    font-size: larger;
+    font-size: 25px;
     background-color: #b6d0bc;
 }
 
 th:nth-child(1) {
     width: 100px;
+}
+th:last-child {
+    width: 160px;
 }
 td:nth-child(7) {
     display: flex;

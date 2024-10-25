@@ -55,7 +55,7 @@ function deleteRecord(recordId, tableRow) {
         headers: {
             "Content-Type": "application/json",
         },
-        body: JSON.stringify({ transaction_id: recordId }), // This should match the FastAPI backend's expected data
+        body: JSON.stringify({ transaction_id: recordId }),
     })
         .then((response) => {
             if (!response.ok) {
@@ -64,7 +64,6 @@ function deleteRecord(recordId, tableRow) {
             return response.json();
         })
         .then(() => {
-            // Remove the table row from the DOM after successful deletion
             tableRow.remove();
             console.log(`Record with ID ${recordId} deleted successfully.`);
         })
@@ -80,20 +79,16 @@ document.addEventListener("DOMContentLoaded", () => {
     const recordForm = document.getElementById("recordForm");
     const bodyTitle = document.getElementById("body-title");
 
-    // Initially hide the add record form
     addRecordForm.style.display = "none";
 
-    // When the "ADD" button is clicked
     addButton.addEventListener("click", () => {
         if (addButton.innerText === "ADD") {
-            // Show the form and hide the table
             addButton.innerText = "Back";
             addButton.style.backgroundColor = "#AA8C4C";
             bodyTitle.innerText = "Add New Record";
             recordTable.style.display = "none";
             addRecordForm.style.display = "block";
         } else {
-            // Back to table view
             addButton.innerText = "ADD";
             addButton.style.backgroundColor = "#28a745";
             bodyTitle.innerText = "Record";
@@ -102,25 +97,19 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    // Handle the form submission
     recordForm.addEventListener("submit", (e) => {
-        e.preventDefault(); // Prevent the form from submitting in the traditional way
+        e.preventDefault();
 
-        // Get the values from the form
         const amount = document.getElementById("amount").value;
         const type = document.querySelector('input[name="type"]:checked').value;
         const describe = document.getElementById("describe").value;
-        const currentDate = new Date().toISOString().split("T")[0]; // Get the current date
 
-        // Create the new record object
         const newRecord = {
             amount: amount,
             type: type,
             describe: describe,
         };
-        console.log(newRecord);
 
-        // Make the POST request to add the new record to the backend
         fetch("http://127.0.0.1:8000/transaction/add", {
             method: "POST",
             headers: {
@@ -134,8 +123,8 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
                 return response.json();
             })
-            .then((data) => {
-                // The record has been successfully added to the backend, now add it to the table
+            .then(({ data }) => {
+                console.log(data);
                 const tableBody = document.getElementById("table-body");
                 const newRow = document.createElement("tr");
 
@@ -151,20 +140,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 tableBody.appendChild(newRow);
 
-                // Add event listener for the delete button of the new row
                 const deleteButton = newRow.querySelector(".delete-btn");
                 deleteButton.addEventListener("click", (e) => {
                     deleteRecord(data.id, newRow);
                 });
 
-                // Back to table view after submission
                 addButton.innerText = "ADD";
                 addButton.style.backgroundColor = "#28a745";
                 bodyTitle.innerText = "Record";
                 recordTable.style.display = "table";
                 addRecordForm.style.display = "none";
 
-                // Clear the form fields
                 recordForm.reset();
             })
             .catch((error) => {
