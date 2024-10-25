@@ -28,7 +28,7 @@ def createNewTransaction(amount,type,description):
     today = date.today()
     cwd.postNewTransaction(transactionID,amount,type,description,today)
     data = getTransaction()
-    return data
+    return data[-1]
 
 
 def deleteTransaction(transactionID):
